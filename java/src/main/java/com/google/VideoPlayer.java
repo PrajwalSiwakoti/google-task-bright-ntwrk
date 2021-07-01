@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -368,23 +369,21 @@ public class VideoPlayer {
             }
             System.out.println("Would you like to play any of the above? If yes, specify the number of the video.");
             System.out.println("If your answer is not a valid number, we'll assume it's a no.");
-            try{
-                  var scanner = new Scanner(System.in);
+             Scanner scanner = new Scanner(System.in);
+            try {
+                // scanner = new Scanner(System.in);
 
-            int inputIndex = scanner.nextInt();
-            int newInputIndex = (int)inputIndex;
-            if(newInputIndex > 0 && newInputIndex < outputVideos.size()){
-                Video video = outputVideos.get(newInputIndex);
-            if (video != null) {
-                playVideo(video);
-                return;
-            }
-            else{
-                return;
-            }
-            }
-            }catch(Exception $ex){
-                throw $ex;
+                var inputIndex = scanner.next();
+                int newInputIndex = Integer.parseInt(inputIndex);
+                if (newInputIndex > 0 && newInputIndex < outputVideos.size()) {
+                    Video video = outputVideos.get(newInputIndex);
+                    if (video != null) {
+                        playVideo(video);
+                        return;
+                    }
+                }
+            } catch (InputMismatchException $ex) {
+                scanner.next();
             }
           
            
